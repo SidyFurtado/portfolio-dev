@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Meu-Dinheiro-Web",
+    "title": "Meu Dinheiro (Web)",
+    "description": "Controle Financeiro Descomplicado - Versão Web. Uma aplicação para gestão financeira pessoal simples e intuitiva.",
+    "url": "https://github.com/SidyFurtado/Meu-Dinheiro-Web",
+    "primaryLanguage": "HTML/JavaScript",
+    "languages": ["HTML", "JavaScript", "CSS"],
+    "category": "Web Application"
+  },
+  {
+    "name": "Meu-Dinheiro",
+    "title": "Meu Dinheiro (App Landing Page)",
+    "description": "Página de download e apresentação do aplicativo de controle financeiro pessoal.",
+    "url": "https://github.com/SidyFurtado/Meu-Dinheiro",
+    "primaryLanguage": "HTML",
+    "languages": ["HTML", "JavaScript", "CSS"],
+    "category": "Landing Page"
+  },
+  {
+    "name": "VST-Project",
+    "title": "AUREQ Parametric Equalizer",
+    "description": "Projeto de Equalizador Paramétrico AUREQ em C++. Um plug-in de áudio VST para processamento de sinal digital em tempo real.",
+    "url": "https://github.com/SidyFurtado/VST-Project",
+    "primaryLanguage": "C++",
+    "languages": ["C++", "CMake", "Shell", "HTML"],
+    "category": "Audio Software / DSP"
+  },
+  {
+    "name": "verdade-ou-consequencia",
+    "title": "Verdade ou Consequência",
+    "description": "Jogo interativo de Verdade ou Consequência voltado para o público adulto.",
+    "url": "https://github.com/SidyFurtado/verdade-ou-consequencia",
+    "primaryLanguage": "JavaScript",
+    "languages": ["JavaScript", "HTML", "CSS"],
+    "category": "Game"
+  },
+  {
+    "name": "entre-nos",
+    "title": "Entre Nós",
+    "description": "Jogo de Verdade ou Consequência para casais focado em intimidade, conexão e diversão.",
+    "url": "https://github.com/SidyFurtado/entre-nos",
+    "primaryLanguage": "JavaScript",
+    "languages": ["JavaScript", "HTML", "CSS"],
+    "category": "Game"
+  },
+  {
+    "name": "projeto-filmmaker",
+    "title": "Filmmaker Document Hub",
+    "description": "Hub centralizado de documentos e recursos para controle de produção cinematográfica e audiovisual.",
+    "url": "https://github.com/SidyFurtado/projeto-filmmaker",
+    "primaryLanguage": "JavaScript",
+    "languages": ["JavaScript", "HTML", "CSS"],
+    "category": "Web Application"
+  },
+  {
+    "name": "lili-nervours",
+    "title": "Lili Nervours",
+    "description": "Aplicação interativa web desenvolvida em JavaScript, HTML e CSS.",
+    "url": "https://github.com/SidyFurtado/lili-nervours",
+    "primaryLanguage": "JavaScript",
+    "languages": ["JavaScript", "HTML", "CSS"],
+    "category": "Web Application"
+  },
+  {
+    "name": "aplicativo-de-compras",
+    "title": "Aplicativo de Compras",
+    "description": "Uma lista de compras web simples e funcional para controle rápido de itens de mercado.",
+    "url": "https://github.com/SidyFurtado/aplicativo-de-compras",
+    "primaryLanguage": "HTML",
+    "languages": ["HTML"],
+    "category": "Utility"
+  }
+]
