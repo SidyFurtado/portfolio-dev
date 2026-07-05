@@ -53,3 +53,7 @@ Para adicionar ou atualizar informações sobre os projetos apresentados, basta 
   "category": "Categoria"
 }
 ```
+
+---
+
+*Nota: Este repositório está configurado para atualizar e enviar alterações automaticamente para o GitHub a cada commit local.*
