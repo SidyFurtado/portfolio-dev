@@ -9,6 +9,13 @@ This skill guides any agent working on Sidy Furtado's developer portfolio to ach
 
 ---
 
+## 🇧🇷 Idioma e Localização (PT-BR)
+- **O site deve ser totalmente em Português do Brasil (PT-BR)**.
+- Todos os textos de interface, botões, títulos, descrições de projetos, tags, labels de cursor interativo (ex: "VER", "ARRASTAR", "FECHAR") e metadados SEO devem ser mantidos estritamente em português de forma fluida, moderna e sofisticada.
+
+---
+
+
 ## 🎨 Design Philosophy & References
 
 The project aims to blend and exceed the design languages of three reference websites:
