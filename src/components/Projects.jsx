@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import './Projects.css'
@@ -10,7 +10,7 @@ const PROJECTS = [
     id: 1,
     number: '01',
     title: 'Meu Dinheiro',
-    subtitle: 'Controle financeiro web',
+    subtitle: 'Controle financeiro pessoal web simplificado.',
     tags: ['HTML', 'JavaScript', 'CSS'],
     category: 'Aplicação Web',
     url: 'https://github.com/SidyFurtado/Meu-Dinheiro-Web',
@@ -22,7 +22,7 @@ const PROJECTS = [
     id: 2,
     number: '02',
     title: 'AUREQ Equalizer',
-    subtitle: 'Plug-in VST de áudio paramétrico em C++',
+    subtitle: 'Plug-in VST de áudio paramétrico em tempo real.',
     tags: ['C++', 'DSP', 'CMake'],
     category: 'Engenharia de Áudio',
     url: 'https://github.com/SidyFurtado/VST-Project',
@@ -34,7 +34,7 @@ const PROJECTS = [
     id: 3,
     number: '03',
     title: 'Verdade ou Consequência',
-    subtitle: 'Jogo de entretenimento adulto',
+    subtitle: 'Jogo interativo adulto de verdade ou consequência.',
     tags: ['JavaScript', 'HTML', 'CSS'],
     category: 'Game',
     url: 'https://github.com/SidyFurtado/verdade-ou-consequencia',
@@ -46,7 +46,7 @@ const PROJECTS = [
     id: 4,
     number: '04',
     title: 'Filmmaker Doc Hub',
-    subtitle: 'Centralizador de produção audiovisual',
+    subtitle: 'Painel central de documentos e fluxo de produção.',
     tags: ['JavaScript', 'HTML', 'CSS'],
     category: 'Aplicação Web',
     url: 'https://github.com/SidyFurtado/projeto-filmmaker',
@@ -58,7 +58,7 @@ const PROJECTS = [
     id: 5,
     number: '05',
     title: 'Portfólio Audiovisual',
-    subtitle: 'Portfólio de Sidy Furtado | Produtor Audiovisual',
+    subtitle: 'Apresentação profissional como produtor de vídeo.',
     tags: ['HTML', 'CSS', 'Design', 'Vídeo'],
     category: 'Filmmaking',
     url: 'https://github.com/SidyFurtado/portfolio',
@@ -68,39 +68,116 @@ const PROJECTS = [
   },
 ]
 
-export default function Projects() {
-  const headingRef = useRef(null)
-  const listRef = useRef(null)
-  const previewContainerRef = useRef(null)
-  const [modal, setModal] = useState({ active: false, index: 0 })
+function ProjectCard({ project, index }) {
+  const cardRef = useRef(null)
 
-  // Cursor following logic for the floating preview
   useEffect(() => {
-    const container = listRef.current
-    const preview = previewContainerRef.current
-    if (!container || !preview) return
+    const card = cardRef.current
+    gsap.fromTo(
+      card,
+      { opacity: 0, y: 60, rotateX: -15 },
+      {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        duration: 0.9,
+        ease: 'expo.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+        },
+        delay: (index % 3) * 0.12,
+      }
+    )
 
-    // Position setup
-    gsap.set(preview, { xPercent: -50, yPercent: -50, scale: 0 })
+    // 3D tilt interaction
+    const onEnter = () => {
+      const onMove = (ev) => {
+        const rect = card.getBoundingClientRect()
+        const x = ((ev.clientX - rect.left) / rect.width - 0.5) * 15
+        const y = -((ev.clientY - rect.top) / rect.height - 0.5) * 15
+        gsap.to(card, {
+          rotateY: x,
+          rotateX: y,
+          scale: 1.02,
+          duration: 0.4,
+          ease: 'power2.out',
+          transformPerspective: 800,
+        })
+      }
+      card.addEventListener('mousemove', onMove)
+      card._onMove = onMove
+    }
 
-    const onMouseMove = (e) => {
-      const rect = container.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      
-      gsap.to(preview, {
-        x: x,
-        y: y,
-        duration: 0.45,
+    const onLeave = () => {
+      card.removeEventListener('mousemove', card._onMove)
+      gsap.to(card, {
+        rotateY: 0,
+        rotateX: 0,
+        scale: 1,
+        duration: 0.6,
         ease: 'power3.out',
+        transformPerspective: 800,
       })
     }
 
-    container.addEventListener('mousemove', onMouseMove)
-    return () => container.removeEventListener('mousemove', onMouseMove)
-  }, [])
+    card.addEventListener('mouseenter', onEnter)
+    card.addEventListener('mouseleave', onLeave)
+    return () => {
+      card.removeEventListener('mouseenter', onEnter)
+      card.removeEventListener('mouseleave', onLeave)
+    }
+  }, [index])
 
-  // Header and Rows scroll animation
+  return (
+    <a
+      href={project.preview || project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="project-card"
+      ref={cardRef}
+      style={{ '--accent': project.accent }}
+      data-cursor
+    >
+      <div className="project-card__inner">
+        <div className="project-card__top">
+          <span className="project-card__number">{project.number}</span>
+          <span className="project-card__category">{project.category}</span>
+        </div>
+
+        {/* Vertical Aspect Ratio Preview Container */}
+        <div className="project-card__preview-wrapper">
+          {project.image ? (
+            <img src={project.image} alt={project.title} className="project-card__image" />
+          ) : (
+            <div className="project-card__fallback">
+              <span className="code-symbol">&lt;/&gt;</span>
+              <span className="fallback-text">C++ Audio Plugin / VST</span>
+            </div>
+          )}
+          <div className="project-card__overlay-shimmer" />
+        </div>
+
+        <h3 className="project-card__title">{project.title}</h3>
+        <p className="project-card__subtitle">{project.subtitle}</p>
+        
+        <div className="project-card__bottom">
+          <div className="project-card__tags">
+            {project.tags.map((t) => (
+              <span key={t} className="project-card__tag">{t}</span>
+            ))}
+          </div>
+          <div className="project-card__arrow">↗</div>
+        </div>
+      </div>
+      <div className="project-card__glow" />
+    </a>
+  )
+}
+
+export default function Projects() {
+  const headingRef = useRef(null)
+
   useEffect(() => {
     gsap.fromTo(
       headingRef.current,
@@ -116,46 +193,7 @@ export default function Projects() {
         },
       }
     )
-
-    const rows = listRef.current.querySelectorAll('.project-row')
-    rows.forEach((row, i) => {
-      gsap.fromTo(
-        row,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: row,
-            start: 'top 90%',
-          },
-          delay: i * 0.05,
-        }
-      )
-    })
   }, [])
-
-  const handleMouseEnter = (index) => {
-    setModal({ active: true, index })
-    gsap.to(previewContainerRef.current, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.35,
-      ease: 'back.out(1.5)',
-    })
-  }
-
-  const handleMouseLeave = () => {
-    setModal({ active: false, index: modal.index })
-    gsap.to(previewContainerRef.current, {
-      scale: 0,
-      opacity: 0,
-      duration: 0.3,
-      ease: 'power2.in',
-    })
-  }
 
   return (
     <section id="projetos" className="projects">
@@ -168,59 +206,10 @@ export default function Projects() {
           </h2>
         </div>
 
-        {/* Vertical Rows Container */}
-        <div className="projects__list" ref={listRef} data-cursor>
+        <div className="projects__grid">
           {PROJECTS.map((project, index) => (
-            <a
-              key={project.id}
-              href={project.preview || project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-row"
-              style={{ '--accent': project.accent }}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <div className="project-row__content">
-                <div className="project-row__left">
-                  <span className="project-row__number">{project.number}</span>
-                  <h3 className="project-row__title">{project.title}</h3>
-                </div>
-                <div className="project-row__center">
-                  <span className="project-row__subtitle">{project.subtitle}</span>
-                </div>
-                <div className="project-row__right">
-                  <span className="project-row__category">{project.category}</span>
-                  <div className="project-row__arrow">↗</div>
-                </div>
-              </div>
-            </a>
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
-
-          {/* Single Shared Floating Preview Window */}
-          <div className="projects__floating-preview" ref={previewContainerRef}>
-            <div 
-              className="projects__floating-slider"
-              style={{ transform: `translateY(-${modal.index * 100}%)` }}
-            >
-              {PROJECTS.map((project) => (
-                <div className="projects__floating-slide" key={project.id}>
-                  {project.image ? (
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="projects__floating-image" 
-                    />
-                  ) : (
-                    <div className="projects__floating-fallback" style={{ '--accent-fallback': project.accent }}>
-                      <span className="floating-fallback-code">&lt;/&gt;</span>
-                      <span className="floating-fallback-desc">C++ VST / Audio</span>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>
