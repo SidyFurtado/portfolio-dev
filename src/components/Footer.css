@@ -1,0 +1,122 @@
+.footer {
+  padding-top: 10rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer__line {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 8rem;
+}
+
+.footer__inner {
+  padding-bottom: 8rem;
+}
+
+.footer__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.footer__big-text {
+  font-size: clamp(3rem, 9vw, 8rem);
+  line-height: 1.05;
+  max-width: 800px;
+}
+
+.footer__sub {
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  color: var(--text-secondary);
+  max-width: 380px;
+}
+
+/* ── Magnetic Button ── */
+.footer__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: white;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: none;
+  margin-top: 2rem;
+  box-shadow: 0 0 40px rgba(108,99,255,0.5), 0 0 80px rgba(0,212,255,0.2);
+  transition: box-shadow 0.4s ease;
+  text-decoration: none;
+}
+
+.footer__btn:hover {
+  box-shadow: 0 0 80px rgba(108,99,255,0.8), 0 0 120px rgba(0,212,255,0.4);
+}
+
+.footer__btn-glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--accent-1),
+    var(--accent-2),
+    var(--accent-3),
+    var(--accent-1)
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: blur(8px);
+}
+
+.footer__btn:hover .footer__btn-glow {
+  opacity: 0.6;
+}
+
+/* ── Bottom Bar ── */
+.footer__bottom {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 0;
+}
+
+.footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer__copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer__copy strong {
+  color: var(--text-secondary);
+}
+
+.footer__links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer__links a {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+  cursor: none;
+}
+
+.footer__links a:hover {
+  color: var(--accent-2);
+}
