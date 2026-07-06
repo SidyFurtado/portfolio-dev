@@ -62,8 +62,8 @@ const PROJECTS = [
     tags: ['HTML', 'CSS', 'Design', 'Vídeo'],
     category: 'Filmmaking',
     url: 'https://github.com/SidyFurtado/portfolio',
-    preview: 'https://sidyfurtado.github.io/portfolio/',
-    image: '/portfolio-dev/preview_audiovisual.png',
+    preview: null,
+    image: null,
     accent: '#00d4ff',
   },
 ]
@@ -151,12 +151,17 @@ function ProjectCard({ project, index }) {
             <img src={project.image} alt={project.title} className="project-card__image" />
           ) : (
             <div className="project-card__fallback">
-              <span className="code-symbol">&lt;/&gt;</span>
-              <span className="fallback-text">C++ Audio Plugin / VST</span>
+              <span className="code-symbol">
+                {project.category === 'Engenharia de Áudio' ? 'DSP' : project.category === 'Filmmaking' ? '🎬' : '</>'}
+              </span>
+              <span className="fallback-text">
+                {project.category === 'Engenharia de Áudio' ? 'C++ Audio Plugin / VST' : 'Portfólio / Repositório'}
+              </span>
             </div>
           )}
           <div className="project-card__overlay-shimmer" />
         </div>
+
 
         <h3 className="project-card__title">{project.title}</h3>
         <p className="project-card__subtitle">{project.subtitle}</p>
